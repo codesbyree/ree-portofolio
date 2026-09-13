@@ -1,0 +1,86 @@
+---
+import { Image } from "astro:assets";
+
+import aboutImage from "@/assets/images/about-picture.jpg";
+---
+
+<section id="about-section" class="bg-[#FAFAFA] py-21.5 xl:py-25">
+    <div class="2xl:max-w-360 px-4 md:px-6 xl:px-12.5 2xl:px-0 mx-auto w-full flex flex-col gap-16 relative">
+        <div class="flex flex-col xl:grid xl:grid-cols-16 gap-5 relative z-10 flex-1">
+            <div class="col-span-7">
+                <span data-hover-scramble data-original-text="About" data-target-text="About" class="font-pixels text-xl text-gray-500 tracking-tight font-semibold">
+                    About
+                </span>
+            </div>
+
+            <div class="col-span-9 col-start-8 row-start-1 space-y-4">
+                <h2 id="about-title" class="sticky top-0 text-2xl md:text-3xl xl:text-[3.5rem] leading-9 md:leading-11 xl:leading-18 tracking-tight font-semibold text-blue-950">
+                    Bahri is a Frontend Developer with a strong foundation in Website Development and hands-on experience building scalable, accessible web applications using React.js, Next.js, Astro,
+                    and WordPress.
+                </h2>
+            </div>
+
+            <div id="about-image" class="w-38.25 h-47.75 bg-gray-100 ml-auto xl:absolute bottom-0 left-0">
+                <Image src={aboutImage} alt="" class="w-full h-full" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap, SplitText } from "@/libs/gsap";
+
+    function initAnimation() {
+        const sectionContainer = document.querySelector("#about-section");
+        const sectionTitle = document.querySelector("#about-title");
+        const aboutImage = document.querySelector("#about-image");
+
+        const mm = gsap.matchMedia();
+        mm.add("(min-width:1280px)", () => {
+            const sectionTitleSplit = new SplitText(sectionTitle, {
+                type: "words",
+                wordsClass: "opacity-10",
+            });
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionContainer,
+                    start: "top top",
+                    toggleActions: "play none none none",
+                    end: 1800,
+                    pin: true,
+                    scrub: true,
+                },
+            });
+
+            const imageTl = gsap.timeline({
+                defaults: {
+                    duration: 0.5,
+                    ease: "power3.out(1.5)",
+                },
+                scrollTrigger: {
+                    trigger: aboutImage,
+                    start: "top 70%",
+                    toggleActions: "play none none none",
+                },
+            });
+
+            imageTl.from(aboutImage, {
+                y: 30,
+                opacity: 0,
+                filter: "blur(12px)",
+            });
+
+            tl.set(
+                sectionTitleSplit.words,
+                {
+                    opacity: 1,
+                    stagger: 0.1,
+                },
+                0.1,
+            );
+        });
+    }
+
+    initAnimation();
+</script>

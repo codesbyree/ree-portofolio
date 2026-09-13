@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+import { type HTMLAttributes } from "astro/types";
+import { cn } from "@/libs/utils";
+import type { ClassValue } from "clsx";
+
+interface Props extends HTMLAttributes<"article"> {
+    title: string;
+    description: string;
+    image: ImageMetadata;
+    year: number;
+    imageContainerClass?: ClassValue;
+    imageClass?: ClassValue;
+    href?: string;
+}
+
+const { title, description, image, year, class: className, imageClass, imageContainerClass, href } = Astro.props;
+---
+
+<a href={href} class={cn("project-card row-start-1 col-span-7 group block", className)}>
+    <article>
+        <div class="w-full space-y-2.5">
+            <div class={cn("w-full pt-[100%] bg-[#E1E1E1] rounded-lg overflow-hidden relative", imageContainerClass)}>
+                <Image src={image} alt="" class={cn("absolute w-full h-full top-0 left-0 group-hover:scale-105 transition-transform", imageClass)} />
+            </div>
+
+            <div class="space-y-1.5">
+                <div class="text-sm text-blue-950 flex justify-between font-semibold">
+                    <h3>{title}</h3>
+                    <span class="font-pixels">{year}</span>
+                </div>
+                <p class="text-xs text-gray-500">{description}</p>
+            </div>
+        </div>
+    </article>
+</a>

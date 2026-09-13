@@ -1,0 +1,53 @@
+<script>
+    import { gsap } from "@/libs/gsap";
+
+    function initAnimation() {
+        const scrambleTextEl = document.querySelectorAll("[data-hover-scramble]");
+
+        scrambleTextEl.forEach((el) => {
+            const originalText = el.getAttribute("data-original-text") || "";
+            const targetText = el.getAttribute("data-target-text") || "";
+
+            const mm = gsap.matchMedia();
+            let tween: any;
+
+            mm.add("(min-width: 1280px)", () => {
+                const scrambleToTarget = () => {
+                    if (tween) tween.kill();
+
+                    tween = gsap.to(el, {
+                        duration: 0.6,
+                        scrambleText: {
+                            text: targetText,
+                            chars: "uppercase",
+                            speed: 0.4,
+                        },
+                    });
+                };
+
+                const scrambleToOriginal = () => {
+                    if (tween) tween.kill();
+
+                    tween = gsap.to(el, {
+                        duration: 0.6,
+                        scrambleText: {
+                            text: originalText,
+                            chars: "uppercase",
+                            speed: 0.4,
+                        },
+                    });
+                };
+
+                el.addEventListener("mouseenter", scrambleToTarget);
+                el.addEventListener("mouseleave", scrambleToOriginal);
+
+                return () => {
+                    el.removeEventListener("mouseenter", scrambleToTarget);
+                    el.removeEventListener("mouseleave", scrambleToOriginal);
+                };
+            });
+        });
+    }
+
+    document.fonts.ready.then(() => initAnimation());
+</script>

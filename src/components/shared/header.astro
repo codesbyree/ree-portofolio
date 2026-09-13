@@ -1,0 +1,68 @@
+---
+import { Image } from "astro:assets";
+
+import mailIcon from "@/assets/images/mail-icon.svg";
+---
+
+<header id="header" class="fixed py-2 w-full z-1000">
+    <div class="mx-auto flex justify-between gap-10 px-4 md:px-6 xl:px-12.5 2xl:max-w-360 2xl:px-0 relative z-10">
+        <div id="logo-container" class="text-white">
+            <a href="/" id="logo" data-hover-scramble data-original-text="Bahri" data-target-text="Saepul Bahri" class="font-pixels font-bold text-xl w-max h-max">
+                Bahri
+            </a>
+        </div>
+
+        <a href="mailto:bahreesaepul1@gmail.com" class="rounded-full shadow-sm hover:shadow-blue-500 transition-colors group">
+            <span class="bg-[#323269] group-hover:bg-blue-900 text-white font-sans font-semibold text-lg xl:text-xl py-2 px-4 rounded-full tracking-tight border-2 border-[#64649B] shadow-[inset_0_4px_3px_rgba(200,200,255,0.25)] flex items-center gap-4">
+                Contact me
+                <Image src={mailIcon} alt="mail icon" class="w-5 h-5" />
+            </span>
+        </a>
+    </div>
+
+    <div id="header-backdrop" class="absolute top-0 left-0 w-full h-full bg-gray-50/10 backdrop-blur-sm opacity-0" />
+</header>
+
+<script>
+    import { gsap, ScrambleTextPlugin, ScrollTrigger } from "@/libs/gsap";
+
+    function initAnimation() {
+        const header = document.querySelector("#header");
+        const logoContainer = document.querySelector("#logo-container");
+        const headerBackdrop = document.querySelector("#header-backdrop");
+
+        ScrollTrigger.create({
+            trigger: "body",
+            start: "top top",
+            end: "bottom bottom",
+            onUpdate: (self) => {
+                if (self.direction === 1) {
+                    gsap.to(header, {
+                        yPercent: -100,
+                    });
+                } else if (self.direction === -1) {
+                    gsap.to(header, {
+                        yPercent: 0,
+                    });
+                }
+            },
+        });
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: logoContainer,
+                start: "top top",
+                scrub: true,
+                end: "+=200",
+            },
+        });
+
+        tl.to(logoContainer, {
+            color: "#323269",
+        }).to(headerBackdrop, {
+            opacity: 1,
+        });
+    }
+
+    initAnimation();
+</script>
