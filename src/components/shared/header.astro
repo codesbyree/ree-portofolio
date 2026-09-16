@@ -5,7 +5,7 @@ import mailIcon from "@/assets/images/mail-icon.svg";
 ---
 
 <header id="header" class="fixed py-2 w-full z-1000">
-    <div class="mx-auto flex justify-between gap-10 px-4 md:px-6 xl:px-12.5 2xl:max-w-360 2xl:px-0 relative z-10">
+    <div class="mx-auto flex justify-between gap-10 px-4 md:px-6 xl:px-6 2xl:max-w-[1680px] relative z-10">
         <div id="logo-container" class="text-white">
             <a href="/" id="logo" data-hover-scramble data-original-text="Bahri" data-target-text="Saepul Bahri" class="font-pixels font-bold text-xl w-max h-max">
                 Bahri
@@ -19,23 +19,13 @@ import mailIcon from "@/assets/images/mail-icon.svg";
             </span>
         </a>
     </div>
-
-    <div id="header-backdrop" class="absolute top-0 left-0 w-full h-full bg-gray-50/10 backdrop-blur-sm opacity-0" />
 </header>
 
 <script>
     import { gsap, ScrollTrigger } from "@/libs/gsap";
 
     function initAnimation() {
-        const header = document.querySelector("#header");
         const logoContainer = document.querySelector("#logo-container");
-        const headerBackdrop = document.querySelector("#header-backdrop");
-
-        ScrollTrigger.create({
-            trigger: "body",
-            start: "top top",
-            end: "bottom bottom",
-        });
 
         const tl = gsap.timeline({
             scrollTrigger: {
@@ -47,9 +37,7 @@ import mailIcon from "@/assets/images/mail-icon.svg";
         });
 
         tl.to(logoContainer, {
-            color: "#323269",
-        }).to(headerBackdrop, {
-            opacity: 1,
+            opacity: 0,
         });
     }
 

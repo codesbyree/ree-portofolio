@@ -1,11 +1,5 @@
----
-import { Image } from "astro:assets";
-
-import aboutImage from "@/assets/images/about-picture.jpg";
----
-
 <section id="about-section" class="bg-[#FAFAFA] pt-21.5 pb-10 xl:pt-25">
-    <div class="2xl:max-w-360 px-4 md:px-6 xl:px-12.5 2xl:px-0 mx-auto w-full flex flex-col gap-16 relative">
+    <div class="2xl:max-w-[1680px] px-4 md:px-6 xl:px-6 mx-auto w-full flex flex-col gap-16 relative">
         <div class="flex flex-col xl:grid xl:grid-cols-16 gap-5 relative z-10 flex-1">
             <div class="col-span-3">
                 <span data-hover-scramble data-original-text="About" data-target-text="About" class="font-pixels text-xl text-gray-400 tracking-tight font-medium">
@@ -14,7 +8,7 @@ import aboutImage from "@/assets/images/about-picture.jpg";
             </div>
 
             <div class="col-span-9 col-start-8 row-start-1 space-y-4">
-                <h2 id="about-title" class="sticky top-0 text-2xl md:text-3xl xl:text-5xl leading-9 md:leading-11 xl:leading-16 tracking-tighter font-medium text-blue-950">
+                <h2 id="about-title" class="sticky top-0 text-2xl md:text-3xl xl:text-5xl 2xl:text-6xl leading-9 md:leading-11 xl:leading-16 2xl:leading-18 tracking-tighter font-medium text-blue-950">
                     Bahri is a Frontend Developer with a strong foundation in Website Development and hands-on experience building scalable, accessible web applications using React.js, Next.js, Astro,
                     and WordPress.
                 </h2>
@@ -45,14 +39,16 @@ import aboutImage from "@/assets/images/about-picture.jpg";
                     end: 1800,
                     pin: true,
                     scrub: true,
+                    invalidateOnRefresh: true,
                 },
             });
 
-            tl.set(
+            tl.to(
                 sectionTitleSplit.words,
                 {
                     opacity: 1,
                     stagger: 0.1,
+                    ease: "none",
                 },
                 0.1,
             );

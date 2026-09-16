@@ -18,6 +18,7 @@ const {
 const ogImageUrl = new URL(image, Astro.site || Astro.url);
 
 import Header from "@/components/shared/header.astro";
+import Footer from "@/components/shared/footer.astro";
 ---
 
 <html lang="en">
@@ -58,6 +59,7 @@ import Header from "@/components/shared/header.astro";
         <div data-smooth-wrapper>
             <div data-smooth-content>
                 <slot />
+                <Footer />
             </div>
         </div>
 
