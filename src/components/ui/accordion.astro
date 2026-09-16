@@ -1,0 +1,37 @@
+---
+import { cn } from "@/libs/utils";
+import { type HTMLAttributes } from "astro/types";
+import type { ClassValue } from "clsx";
+
+interface Props extends HTMLAttributes<"section"> {
+    leftLabel: string;
+    title: string;
+    contentClass?: ClassValue;
+}
+
+const { leftLabel, title, contentClass } = Astro.props;
+---
+
+<section data-qlf-card data-expanded="false" class="grid grid-cols-16 gap-4 py-2 border-b border-gray-400 w-full group">
+    <span class="font-pixels text-gray-400 col-start-1 col-span-2">{leftLabel}</span>
+
+    <div class="col-start-3 col-span-14 xl:col-span-9 xl:col-start-8 flex flex-col">
+        <div class="flex justify-between items-center">
+            <h3 class="text-2xl text-blue-950 font-medium tracking-tight">{title}</h3>
+
+            <button data-qlf-button class="w-5 h-5 grid place-items-center relative">
+                <span class="block w-5 h-0.5 bg-blue-950"></span>
+                <span class="group-data-[expanded='true']:rotate-90 transition-transform block w-5 h-0.5 bg-blue-950 absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2"></span>
+                <span class="sr-only">Toggle content</span>
+            </button>
+        </div>
+
+        <div class="grid grid-rows-[0fr] group-data-[expanded='true']:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
+            <div class="overflow-hidden">
+                <div class={cn("pt-2 text-base leading-6 text-gray-600 max-w-sm tracking-tight", contentClass)}>
+                    <slot />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

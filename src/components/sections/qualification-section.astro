@@ -1,0 +1,65 @@
+---
+import Accordion from "../ui/accordion.astro";
+---
+
+<section>
+    <div class="2xl:max-w-360 px-4 md:px-6 xl:px-12.5 2xl:px-0 mx-auto w-full flex relative">
+        <div class="flex flex-col w-full border-t border-gray-400">
+            <Accordion leftLabel="01" title="Work Experience" contentClass="max-w-full">
+                <ul class="">
+                    {[
+                        "Freelance Frontend Developer at HEALTHMED-IC (May, 2026)",
+                        "Freelance UI/UX Designer and Frontend Developer at PT Sari Alam Sukabumi (Feb - May, 2026)",
+                        "Frelance Wordpress Developer at Compgineer (Jan, 2026)",
+                        "Wordpress Developer Intern at Nusa Putra Global (Feb - July, 2025)",
+                    ].map((item, i) => (
+                        <li class="py-1">{item}</li>
+                    ))}
+                </ul>
+            </Accordion>
+            <Accordion leftLabel="02" title="Certifications">
+                <p>Oracle Database Associate / Software Engineer Associate / Junior Public Speaker</p>
+            </Accordion>
+            <Accordion leftLabel="03" title="Technical Skills" contentClass="max-w-full">
+                <ul class="max-w-md">
+                    {[
+                        "Proficient in various frontend and full-stack web libraries and frameworks including: NextJs, Astro.Js, and Vite.Js",
+                        "Experienced with using frontend styling libraries such as: Tailwind CSS, SCSS, ShadCN, and Bootstrap",
+                        "Able to use Git as version control system both using GitHub Desktop and Git CLI",
+                        "Able to implement UI design into functioning and pixel-perfect web system",
+                        "Familiar with various frontend design patterns such as: singleton, proxy, observer, mixin, middleware, factory, view transition, PRPL, preload, and prefetch",
+                    ].map((item) => (
+                        <li class="py-1">{item}</li>
+                    ))}
+                </ul>
+            </Accordion>
+            <Accordion leftLabel="04" title="Soft Skills" contentClass="max-w-full">
+                <ul>
+                    {[
+                        "Able to identify problems and break vague requirements into shippable, prioritized work",
+                        "Able to communicate technical work in writing, including documentation and web content for a development agency",
+                        "Able to present and defend technical work to non-technical and academic audiences",
+                        "Able to collaborate in a team using shared version control, code review, and agreed conventions",
+                        "Able to work under deadline pressure while maintaining code quality and scope discipline",
+                    ].map((item) => (
+                        <li class="py-1">{item}</li>
+                    ))}
+                </ul>
+            </Accordion>
+        </div>
+    </div>
+</section>
+
+<script>
+    const qlfCards = document.querySelectorAll("[data-qlf-card]");
+
+    qlfCards.forEach((el) => {
+        const qlfCardBtn = el.querySelector("[data-qlf-button]");
+        if (!qlfCardBtn) return;
+
+        qlfCardBtn.addEventListener("click", () => {
+            const isExpanded = el.getAttribute("data-expanded") === "true";
+            el.setAttribute("data-expanded", String(!isExpanded));
+        });
+    });
+</script>
