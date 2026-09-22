@@ -1,0 +1,17 @@
+---
+import { cn } from "@/libs/utils";
+import { type HTMLAttributes } from "astro/types";
+import { Image } from "astro:assets";
+
+interface Props extends Omit<HTMLAttributes<"img">, "src"> {
+    src: ImageMetadata;
+}
+
+const { src, class: className } = Astro.props;
+---
+
+<div class="relative w-full pt-[calc((394/515)*100%)]">
+    <div class="absolute w-full h-full bg-gray-200 rounded-lg overflow-hidden top-0 left-0">
+        <Image src={src as ImageMetadata} alt="" class={cn("w-full h-full object-cover", className)} />
+    </div>
+</div>

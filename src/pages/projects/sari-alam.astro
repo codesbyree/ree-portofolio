@@ -1,12 +1,156 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import Layout from "@/layouts/ProjectDetailLayout.astro";
 import HoverScrambleText from "@/components/animation/hover-scramble-text.astro";
+import PRBContainer from "@/components/ui/prb-container.astro";
+import PRBText from "@/components/ui/prb-text.astro";
+import PRBImage from "@/components/ui/prb-image.astro";
+import Chip from "@/components/ui/chip.astro";
+import PrbOrList from "@/components/ui/prb-or-list.astro";
+
+import projectOverviewImage from "@/assets/images/project-1.jpg";
 ---
 
-<Layout title="Project PT Sari Alam HR and Attendance System">
+<Layout title="Ree - Project PT Sari Alam">
     <main class="bg-[#FAFAFA]">
-        <div></div>
+        <div class="w-full max-w-[1680px] py-21.5 xl:py-25 px-4 md:px-6">
+            <div class="flex flex-col gap-16 xl:gap-4 xl:grid xl:grid-cols-16">
+                <aside id="sidebar" class="xl:col-span-5">
+                    <a href="/" class="font-medium font-pixels tracking-tight text-gray-400 hover:text-gray-600 transition-colors">
+                        Back
+                    </a>
+                </aside>
+
+                <section class="xl:col-span-9 xl:col-start-8 space-y-6">
+                    <h1 class="text-3xl md:text-4xl xl:text-5xl leading-9 md:leading-11 xl:leading-14 tracking-tight font-medium text-blue-950">
+                        From Shift Bottlenecks to Split-Second Scans: Engineering an AI Attendance Ecosystem for PT Sari Alam Sukabumi
+                    </h1>
+
+                    <div class="flex flex-wrap gap-2">
+                        <Chip>React.Js</Chip>
+                        <Chip>Go</Chip>
+                        <Chip>Computer Vision</Chip>
+                        <Chip>Tailwind CSS</Chip>
+                        <Chip>TypeScript</Chip>
+                    </div>
+
+                    <PRBContainer>
+                        <PRBImage src={projectOverviewImage} />
+                        <PRBText>
+                            At PT Sari Alam Sukabumi, manufacturing operations move fast, but morning shift turnstiles used to move remarkably slow. With hundreds of factory operators and back-office
+                            staff checking in each day, physical badge readers and manual logs routinely created long entry queues. Worse, physical cards left the door open to proxy clock-ins ("buddy
+                            punching"), while HR teams spent hours manually reconciling disjointed paper sheets against shift schedules.
+                        </PRBText>
+
+                        <PRBText>
+                            Behind the scenes, administrative workflows were just as stalled. Shift managers were chasing down paper leave requests, while HR personnel spent hours manually reconciling
+                            physical records against shift rosters for payroll.
+                        </PRBText>
+
+                        <PRBText>
+                            The company needed a connected, tamper-proof operational backbone. Stepping in as UI/UX Designer and Frontend Developer, I set out to architect and build a unified
+                            three-app ecosystem:
+                        </PRBText>
+
+                        <PrbOrList
+                            data={[
+                                "The Frontliner Gate Terminal: A dedicated, kiosk-style web application mounted at entrance checkpoint computers, combining physical RFID badge tapping with biometric face verification.",
+                                "The HR Employee Management System: A full-featured administration platform for HR to manage comprehensive employee records, monitor company-wide attendance patterns,",
+                                "The HR Employee Management System: A full-featured administration platform for HR to manage comprehensive employee records, monitor company-wide attendance patterns, and oversee overall leave and overtime compliance.",
+                                "The Manager Portal: A streamlined management dashboard tailored specifically for shift supervisors and department leads to review, approve, or reject team leave requests and overtime submissions in real time.",
+                            ]}
+                        />
+
+                        <PRBText>
+                            Before writing any code, I mapped the divergent user journeys in Figma. A factory worker standing at a physical gate in high-traffic conditions requires an entirely
+                            different interaction model than a manager approving an overtime request on a laptop, or an HR specialist auditing employee records across multiple shifts.
+                        </PRBText>
+
+                        <PRBText>
+                            For the Frontliner system at the entrance gate, the user interface had to get out of the way. When a worker taps their card on the connected RFID reader, the screen
+                            instantly pulls up their profile, activates the camera viewport, and triggers the face verification pipeline within milliseconds. Every button, status indicator, and prompt
+                            was designed with high visual contrast and bold feedback so workers could confirm their status at a glance without breaking stride.
+                        </PRBText>
+
+                        <PRBText>
+                            When architecting the frontend, the core challenge was handling real-time camera streams, canvas processing, and high-frequency UI updates without dropping frames.
+                        </PRBText>
+
+                        <PRBText>
+                            For the Management Systems, the priorities shifted to workflow efficiency and role-specific clarity. The Manager Portal was kept lean and action-oriented—designed so
+                            supervisors could review shift context, evaluate leave or overtime requests, and process approvals with minimal clicks. Meanwhile, the HR Platform was built for
+                            high-density oversight, equipped with advanced filtering, employee profile management, and comprehensive audit logs that HR teams could work within all day without visual
+                            fatigue.
+                        </PRBText>
+
+                        <PRBText>
+                            The core frontend challenge lay in orchestrating peripheral hardware inputs, live camera video streams, and responsive dashboard updates into a smooth, unified user
+                            experience.
+                        </PRBText>
+
+                        <PRBText>
+                            A common instinct for biometric setups is streaming raw video frames to a remote server for processing. In a manufacturing setting, running continuous video streams over
+                            local plant networks creates latency and risks gate slowdowns during network hiccups. To eliminate this bottleneck, we deployed client-side computer vision models running
+                            directly inside the browser using WebAssembly and WebGL canvas acceleration. The browser directly managed the camera feed, isolated the facial vector mesh, and verified
+                            identity locally against biometric signatures the moment the RFID card identified the employee.
+                        </PRBText>
+
+                        <PRBText>
+                            To structure this architecture, React.js was the core library of choice. React's state management made handling the hardware lifecycle—detecting USB/serial RFID reader
+                            inputs, mounting the camera stream, and transitioning through verification states—predictable and maintainable. It also allowed us to establish shared component foundations
+                            across all three applications.
+                        </PRBText>
+
+                        <PRBText>
+                            For styling and interface components, Tailwind CSS paired with ShadCN UI gave us granular design control without the bloated bundle sizes and rigid style overrides typical
+                            of heavy UI frameworks. To keep the back-office portals synchronized with the entrance gates, TanStack Query handled server-state caching and background re-fetching,
+                            ensuring that HR and managers saw incoming attendance data and approval requests as they happened.
+                        </PRBText>
+
+                        <PRBText>Deploying an automated physical checkpoint combined with multi-tier approval workflows surfaced real-world edge cases.</PRBText>
+
+                        <PRBText>
+                            The most critical issue was securing the entrance gate against spoofing and proxy check-ins. Simply matching a face to an RFID card was vulnerable to bad actors holding up
+                            a printed photo or a smartphone image of a colleague to the lens. To counter this, I implemented an active liveness detection pipeline alongside the face match. Once the
+                            worker taps their RFID card, the system prompts for a dynamic, randomized micro-action—such as an eye blink cadence or a subtle head turn within a three-second window. Only
+                            when authentic physical depth and motion were verified alongside facial vectors would the frontliner kiosk log the timestamp and emit the green confirmation signal.
+                        </PRBText>
+
+                        <PRBText>
+                            A secondary challenge was hardware resilience. The Frontliner gate computer ran continuously throughout day and night shifts. Running continuous computer vision inference
+                            on an active camera feed in an open browser tab quickly led to memory leaks and processor thermal throttling, causing frame drops and input lag.
+                        </PRBText>
+
+                        <PRBText>
+                            To solve this, I decoupled the video stream from active inference. The camera feed remains idle in a standby loop until an event listener captures the RFID card swipe. Only
+                            then does the facial detection model spin up, execute the liveness and match sequence, submit the encrypted payload, and immediately release its compute resources back to
+                            the browser. This eliminated memory bloat and ensured the terminal remained responsive all day.
+                        </PRBText>
+
+                        <PRBText>
+                            Finally, managing the back-office experience meant handling multi-tier authorization cleanly. Because HR administrators and department managers utilized separate management
+                            platforms with overlapping data, we established distinct permission layers and reusable data-grid components. By leveraging virtualized list rendering with TanStack Virtual
+                            in the HR portal, tables displaying hundreds of employee shift records could be sorted, filtered, and audited at 60 FPS without DOM lag.
+                        </PRBText>
+
+                        <PRBText>
+                            By uniting physical entry points with digital approval pipelines, the new ecosystem transformed daily operations at PT Sari Alam Sukabumi. The combined
+                            RFID-and-face-verification terminal eliminated proxy attendance while keeping entry lines moving rapidly during shift changes. Meanwhile, supervisors and HR teams replaced
+                            paper request forms and manual spreadsheets with dedicated portals for instant approvals and automated record-keeping. The project proved that client-side web technologies
+                            can seamlessly bridge physical gate hardware and enterprise workflows in demanding operational environments.
+                        </PRBText>
+                    </PRBContainer>
+                </section>
+            </div>
+        </div>
     </main>
 
     <HoverScrambleText />
 </Layout>
+
+<script>
+    import { gsap } from "@/libs/gsap";
+
+    function initAnimation() {}
+
+    initAnimation();
+</script>

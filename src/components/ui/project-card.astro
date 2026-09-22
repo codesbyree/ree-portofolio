@@ -17,7 +17,7 @@ interface Props extends HTMLAttributes<"article"> {
 const { title, description, image, year, class: className, imageClass, imageContainerClass, href } = Astro.props;
 ---
 
-<a href={href} class={cn("project-card row-start-1 col-span-7 group block", className)}>
+<a href={href} class={cn("project-card row-start-1 col-span-7 group block h-max", className)}>
     <article>
         <div class="w-full space-y-2.5">
             <div class={cn("w-full pt-[100%] bg-[#E1E1E1] rounded-lg overflow-hidden relative", imageContainerClass)}>

@@ -1,0 +1,16 @@
+---
+import { cn } from "@/libs/utils";
+import { type HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"ul"> {
+    data: string[];
+}
+
+const { data, class: className } = Astro.props;
+---
+
+<ul class={cn("text-gray-500 text-lg xl:text-xl leading-7 xl:leading-7.5 tracking-normal list-decimal pl-10 flex flex-col gap-4", className)}>
+    {data.map((item) => (
+        <li>{item}</li>
+    ))}
+</ul>

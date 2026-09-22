@@ -17,7 +17,7 @@ const { leftLabel, title, contentClass } = Astro.props;
 
     <div class="col-start-3 col-span-14 xl:col-span-9 xl:col-start-8 flex flex-col">
         <div class="flex justify-between items-center">
-            <h3 class="text-2xl text-blue-950 font-medium tracking-tight">{title}</h3>
+            <h3 class="text-xl xl:text-2xl text-blue-950 font-medium tracking-tight">{title}</h3>
 
             <button data-qlf-button class="w-5 h-5 grid place-items-center relative">
                 <span class="block w-5 h-0.5 bg-blue-950"></span>
@@ -28,7 +28,7 @@ const { leftLabel, title, contentClass } = Astro.props;
 
         <div class="grid grid-rows-[0fr] group-data-[expanded='true']:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
             <div class="overflow-hidden">
-                <div class={cn("pt-2 text-base leading-6 text-gray-600 max-w-sm tracking-tight", contentClass)}>
+                <div class={cn("pt-2 text-sm xl:text-base leading-6 text-gray-600 max-w-sm tracking-tight", contentClass)}>
                     <slot />
                 </div>
             </div>
